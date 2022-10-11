@@ -7,23 +7,34 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI highScoreText;
 
-    int score = 0;
-    int highScore = 0;
+
+    public float score;
+
+    public bool useFixedUpdate;
+
+    public float changePerSecond;
 
     //Start is called at first frame
-    private void Start()
+    private void Update()
     {
-        //putting text on the screen
-        scoreText.text = score.ToString() + "POINTS";
-        highScoreText.text = "HIGHSCORE" + highScore.ToString();
+        //changes this value over time
+        if(!useFixedUpdate)
+        {
+            score += changePerSecond * Time.deltaTime;
+        }
+
+        scoreText.text = ((int)score).ToString();
+
     }
 
     //update is called every frame
-    private void Update()
+    private void FixedUpdate()
     {
-        
+        if(useFixedUpdate)
+        {
+            score += changePerSecond * Time.deltaTime;
+        }
     }
 
 }
