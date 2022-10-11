@@ -25,7 +25,8 @@ public class SpriteMovement : MonoBehaviour
         moveRequired.x = horizontalSpeed * speedMultiplier;
         transform.position -= moveRequired * Time.deltaTime;
 
-        if(transform.position.x > screenBoundaries.x)
+        //makes the objects disappear when they leave the screen
+        if(transform.position.x < -screenBoundaries.x)
         {
             Destroy(this.gameObject);
         }
